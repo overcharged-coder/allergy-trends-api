@@ -23,7 +23,7 @@ def get_trends():
 
     merged_df = pd.DataFrame()
     #for i in range(0, len(all_keywords), 4):
-    kw_list = all_keywords[i:i+4]
+    kw_list = all_keywords[0:3]
     pytrends.build_payload(kw_list, timeframe='today 12-m', geo='US')
     data = pytrends.interest_over_time()
     if not data.empty:
