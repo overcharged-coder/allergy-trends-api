@@ -26,11 +26,11 @@ def get_trends():
     kw_list = all_keywords[i:i+4]
     pytrends.build_payload(kw_list, timeframe='today 12-m', geo='US')
     data = pytrends.interest_over_time()
-      if not data.empty:
-         data = data.drop(columns=['isPartial'], errors='ignore')
-         if merged_df.empty:
-             merged_df = data
-         else:
+    if not data.empty:
+        data = data.drop(columns=['isPartial'], errors='ignore')
+        if merged_df.empty:
+            merged_df = data
+        else:
             merged_df = merged_df.join(data, how='outer')
 
     merged_df = merged_df.fillna(0)
