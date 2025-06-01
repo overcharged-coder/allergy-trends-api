@@ -22,16 +22,16 @@ def get_trends():
     ]
 
     merged_df = pd.DataFrame()
-    for i in range(0, len(all_keywords), 4):
-        kw_list = all_keywords[i:i+4]
-        pytrends.build_payload(kw_list, timeframe='today 12-m', geo='US')
-        data = pytrends.interest_over_time()
-        if not data.empty:
-            data = data.drop(columns=['isPartial'], errors='ignore')
-            if merged_df.empty:
-                merged_df = data
-            else:
-                merged_df = merged_df.join(data, how='outer')
+    #for i in range(0, len(all_keywords), 4):
+    kw_list = all_keywords[i:i+4]
+    pytrends.build_payload(kw_list, timeframe='today 12-m', geo='US')
+    data = pytrends.interest_over_time()
+      if not data.empty:
+         data = data.drop(columns=['isPartial'], errors='ignore')
+         if merged_df.empty:
+             merged_df = data
+         else:
+            merged_df = merged_df.join(data, how='outer')
 
     merged_df = merged_df.fillna(0)
     merged_df.index = merged_df.index.astype(str)  # Convert dates to strings for JSON
